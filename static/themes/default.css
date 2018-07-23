@@ -1,0 +1,29 @@
+@import url('https://fonts.googleapis.com/css?family=Lato');
+*{
+    font-family:Lato, sans-serif;
+}
+#content-wrapper{
+    text-align:center;
+}
+h3{
+    font-size:14px;
+    font-weight:100;
+    margin:0;
+}
+h3 img{
+    margin-right:2px;
+}
+.trust-star{
+    display: inline-block;
+    color: white;
+    background-color: #007f4e;
+    border-radius: 2px;
+    margin: 0 1px;
+    padding: 0 3px 2px 3px;
+    font-size: 22px;
+    line-height: 100%;
+}
+#review-count{
+    margin:0;
+    font-size:12px;
+}

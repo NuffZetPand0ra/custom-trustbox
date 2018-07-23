@@ -1,0 +1,22 @@
+{
+    "name": "inkpro/trustpilot",
+    "description": "Takes data from trustpilot, caches it, and generates custom trustboxes.",
+    "type": "project",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Esben",
+            "email": "esben@inkpro.dk"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {
+        "nesbot/carbon": "dev-master",
+        "vlucas/phpdotenv": "^2.5@dev"
+    },
+    "autoload": {
+        "psr-4": {
+            "inkpro\\": "src/"
+        }
+    }
+}
