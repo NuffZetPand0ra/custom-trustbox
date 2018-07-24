@@ -20,7 +20,7 @@ $lang = (isset($_GET['lang']) && isset($strings[$_GET['lang']])) ? $_GET['lang']
 <!doctype html>
 <html>
     <head>
-        <title>Trustbox for <?= $data->display_name; ?></title>
+        <title><?= sprintf("Trustbox for %s",$data->display_name); ?></title>
         <link href="../static/themes/<?= $theme; ?>.css" rel="stylesheet">
         <meta charset="utf-8">
     </head>
