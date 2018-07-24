@@ -16,7 +16,7 @@ $strings = [
     ]
 ];
 $lang = (isset($_GET['lang']) && isset($strings[$_GET['lang']])) ? $_GET['lang'] : "dk";
-$font_size = isset($_GET['fontsize']) ? $_GET['fontsize'] : "12";
+$font_size = isset($_GET['fontsize']) ? $_GET['fontsize'] : "14";
 ?>
 <!doctype html>
 <html>
