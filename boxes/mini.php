@@ -7,7 +7,6 @@ $dotenv->load();
 $data = TrustpilotData::getData();
 $theme = isset($_GET['theme']) ? $_GET['theme'] : "default";
 $background_color = isset($_GET['bg_hex']) ? $_GET['bg_hex'] : "fff";
-$lang = isset($_GET['lang']) ? $_GET['lang'] : "dk";
 $strings = [
     "dk"=>[
         "review_count"=>"%s anmeldelser"
@@ -16,6 +15,7 @@ $strings = [
         "review_count"=>"%s recensioner"
     ]
 ];
+$lang = (isset($_GET['lang']) && isset($strings[$_GET['lang']])) ? $_GET['lang'] : "dk";
 ?>
 <!doctype html>
 <html>
@@ -27,7 +27,7 @@ $strings = [
     <body style="background-color:#<?= $background_color; ?>">
     <a target="_blank" href="<?= $data->profile_url; ?>">
         <div id="content-wrapper">
-            <h3><img src="../static/img/trustpilot_logo_10x10.gif">Trustscore <?= $data->trust_score; ?></h3>
+            <h3><img src="../static/img/trustpilot_logo_10x10.gif"><?= sprintf("Trustscore %s",$data->trust_score); ?></h3>
             <div id="trust-stars">
                 <?php for($i=1; $i<=$data->stars; $i++): ?>
                 <span class="trust-star star-<?= $i; ?>">&#9733;</span>
