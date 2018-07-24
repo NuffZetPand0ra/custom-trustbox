@@ -17,24 +17,26 @@ a{
     display:block;
 }
 h3{
-    font-size:14px;
+    font-size:1em;
     font-weight:100;
     margin:0;
 }
 h3 img{
-    margin-right:2px;
+    margin-right:0.2em;
+    height:0.75em;
+    width:auto;
 }
 .trust-star{
     display: inline-block;
     color: white;
     background-color: #007f4e;
-    border-radius: 2px;
-    margin: 0 1px;
-    padding: 0 3px 2px 3px;
-    font-size: 22px;
-    line-height: 100%;
+    border-radius: 0.15em;
+    margin: 0 0.05em;
+    padding: 0 0.15em 0.15em;
+    line-height:100%;
+    font-size:1.4em;
 }
 #review-count{
     margin:0;
-    font-size:12px;
+    font-size:0.8em;
 }

@@ -16,6 +16,7 @@ $strings = [
     ]
 ];
 $lang = (isset($_GET['lang']) && isset($strings[$_GET['lang']])) ? $_GET['lang'] : "dk";
+$font_size = isset($_GET['fontsize']) ? $_GET['fontsize'] : "12";
 ?>
 <!doctype html>
 <html>
@@ -24,7 +25,7 @@ $lang = (isset($_GET['lang']) && isset($strings[$_GET['lang']])) ? $_GET['lang']
         <link href="../static/themes/<?= $theme; ?>.css" rel="stylesheet">
         <meta charset="utf-8">
     </head>
-    <body style="background-color:#<?= $background_color; ?>">
+    <body style="background-color:#<?= $background_color; ?>;font-size:<?= $font_size; ?>px">
     <a target="_blank" href="<?= $data->profile_url; ?>">
         <div id="content-wrapper">
             <h3><img src="../static/img/trustpilot_logo_10x10.gif"><?= sprintf("Trustscore %s",$data->trust_score); ?></h3>
