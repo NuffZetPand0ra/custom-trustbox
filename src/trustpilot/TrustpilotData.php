@@ -20,12 +20,15 @@ class TrustpilotData{
 
 
     static function getData(){
+        // $instance = self::loadLive();
+        // $instance->saveToCache();
         if($instance = self::loadCached()){
             $five_minutes_ago = (new Carbon())->subMinutes(5);
             if($instance->last_fetched < $five_minutes_ago){
                 $instance = self::loadLive();
-                $instance->saveToCache();
             }
+        }else{
+            $instance = self::loadLive();
         }
         return $instance;
     }
@@ -53,6 +56,7 @@ class TrustpilotData{
         $instance->trust_score = $data->businessUnit->trustScore;
         $instance->profile_url = $data->links->profileUrl;
         $instance->display_name = $data->businessUnit->displayName;
+        $instance->saveToCache();
         return self::$instance = $instance;
     }
     public function saveToCache(){

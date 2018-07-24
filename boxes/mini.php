@@ -6,6 +6,7 @@ $dotenv = new Dotenv(__DIR__.'/../');
 $dotenv->load();
 $data = TrustpilotData::getData();
 $theme = isset($_GET['theme']) ? $_GET['theme'] : "default";
+$background_color = isset($_GET['bg_hex']) ? $_GET['bg_hex'] : "fff";
 ?>
 <!doctype html>
 <html>
@@ -14,7 +15,7 @@ $theme = isset($_GET['theme']) ? $_GET['theme'] : "default";
         <link href="../static/themes/<?= $theme; ?>.css" rel="stylesheet">
         <meta charset="utf-8">
     </head>
-    <body>
+    <body style="background-color:#<?= $background_color; ?>">
     <div id="content-wrapper">
         <h3><img src="../static/img/trustpilot_logo_10x10.gif">Trustscore <?= $data->trust_score; ?></h3>
         <div id="trust-stars">
