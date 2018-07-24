@@ -7,6 +7,15 @@ $dotenv->load();
 $data = TrustpilotData::getData();
 $theme = isset($_GET['theme']) ? $_GET['theme'] : "default";
 $background_color = isset($_GET['bg_hex']) ? $_GET['bg_hex'] : "fff";
+$lang = isset($_GET['lang']) ? $_GET['lang'] : "dk";
+$strings = [
+    "dk"=>[
+        "review_count"=>"%s anmeldelser"
+    ],
+    "se"=>[
+        "review_count"=>"%s recensioner"
+    ]
+];
 ?>
 <!doctype html>
 <html>
@@ -24,7 +33,7 @@ $background_color = isset($_GET['bg_hex']) ? $_GET['bg_hex'] : "fff";
                 <span class="trust-star star-<?= $i; ?>">&#9733;</span>
                 <?php endfor; ?>
             </div>
-            <p id="review-count"><?= sprintf("%s anmeldelser",number_format($data->total_number_of_reviews,0,",",".")); ?></p>
+            <p id="review-count"><?= sprintf($strings[$lang]["review_count"],number_format($data->total_number_of_reviews,0,",",".")); ?></p>
         </div>
     </a>
     </body>
