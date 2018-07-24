@@ -12,12 +12,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/briannesbitt/Carbon.git",
-                "reference": "bd87af49e4cd04966c2edcfba31b5a67f60b9799"
+                "reference": "d46699d60b6d4ef834fc0593ac98b1a04e7261a6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/briannesbitt/Carbon/zipball/bd87af49e4cd04966c2edcfba31b5a67f60b9799",
-                "reference": "bd87af49e4cd04966c2edcfba31b5a67f60b9799",
+                "url": "https://api.github.com/repos/briannesbitt/Carbon/zipball/d46699d60b6d4ef834fc0593ac98b1a04e7261a6",
+                "reference": "d46699d60b6d4ef834fc0593ac98b1a04e7261a6",
                 "shasum": ""
             },
             "require": {
@@ -59,7 +59,7 @@
                 "datetime",
                 "time"
             ],
-            "time": "2018-07-23T13:37:05+00:00"
+            "time": "2018-07-23T15:32:03+00:00"
         },
         {
             "name": "symfony/polyfill-mbstring",

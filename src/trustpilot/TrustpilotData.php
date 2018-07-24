@@ -13,18 +13,20 @@ class TrustpilotData{
     public $last_fetched;
     public $display_name;
     public $profile_url;
+    public $reviews;
 
 
     private static $instance;
     private static $cache_path = __DIR__."/../../cachedData.php";
+    private static $cache_ttl = 2;
 
 
     static function getData(){
         // $instance = self::loadLive();
         // $instance->saveToCache();
         if($instance = self::loadCached()){
-            $five_minutes_ago = (new Carbon())->subMinutes(5);
-            if($instance->last_fetched < $five_minutes_ago){
+            $cache_check = (new Carbon())->subMinutes(self::$cache_ttl);
+            if($instance->last_fetched < $cache_check){
                 $instance = self::loadLive();
             }
         }else{
@@ -39,7 +41,14 @@ class TrustpilotData{
     }
     static function loadLive(){
         $businessUnitId = $_ENV['TP_BUSINESS_ID'];
-        $url = "https://widget.trustpilot.com/base-data?businessUnitId=".$businessUnitId;
+        $review_count = 15;
+        $request_data = [
+            "businessUnitId"=>$businessUnitId,
+            "includeReviews"=>"true",
+            "reviewsPerPage"=>15,
+            "reviewStars"=>5
+        ];
+        $url = "https://widget.trustpilot.com/base-data?".http_build_query($request_data);
         $data = json_decode(file_get_contents($url));
         $instance = new TrustpilotData;
         $review_numbers = $data->businessUnit->numberOfReviews;
@@ -56,6 +65,16 @@ class TrustpilotData{
         $instance->trust_score = $data->businessUnit->trustScore;
         $instance->profile_url = $data->links->profileUrl;
         $instance->display_name = $data->businessUnit->displayName;
+        foreach($data->reviews as $this_review){
+            $review = new TrustpilotReview;
+            $review->stars = $this_review->stars;
+            $review->created_at = new Carbon($this_review->createdAt);
+            $review->title = $this_review->reviewUrl;
+            $review->text = $this_review->text;
+            $review->review_url = $this_review->reviewUrl;
+            $review->consumer_name = $this_review->consumer->displayName;
+            $instance->reviews[] = $review;
+        }
         $instance->saveToCache();
         return self::$instance = $instance;
     }
