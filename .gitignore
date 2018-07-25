@@ -2,3 +2,4 @@
 .env
 /vendor/
 cachedData.php
+/templates_*
