@@ -36,9 +36,6 @@ $smarty->assign("review_count_str", __("%s anmeldelser",
     number_format($data->total_number_of_reviews,0,",",".")
 ));
 $smarty->assign("trustscore_str", __("Trustscore %s", $data->trust_score));
-$smarty->assign("formated_review_count", number_format($data->total_number_of_reviews,0,",","."));
-$lang = (isset($_GET['lang']) && isset($strings[$_GET['lang']])) ? $_GET['lang'] : "dk";
 $smarty->assign("font_size", isset($_GET['fontsize']) ? $_GET['fontsize'] : "14");
-
 
 $smarty->display("boxes/$box.tpl");
