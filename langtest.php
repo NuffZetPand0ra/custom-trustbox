@@ -8,4 +8,7 @@ $locale = "sv_SE";
 $t = new GettextTranslator();
 $t->setLanguage($locale);
 $t->loadDomain("messages", "Locale");
-echo $t->gettext("%s anmeldelser");
+
+$t->register();
+
+echo __("%s anmeldelser", 200);
