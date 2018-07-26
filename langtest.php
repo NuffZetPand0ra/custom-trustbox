@@ -4,7 +4,7 @@ use \inkpro\trustpilot\TrustpilotData;
 use \Dotenv\Dotenv;
 use \Gettext\GettextTranslator;
 
-$locale = "sv_SE";
+$locale = isset($_GET['lang']) ? $_GET['lang'] : "sv_SE";
 $t = new GettextTranslator();
 $t->setLanguage($locale);
 $t->loadDomain("messages", "Locale");
