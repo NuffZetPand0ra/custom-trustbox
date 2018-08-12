@@ -37,9 +37,9 @@ h3 img{
     font-size:1.4em;
 }
 #trust-stars #rebrand-stars{
-    width:150px;
+    width:9.15em;
     position: relative;
-    top:2px;
+    top:0.14em;
 }
 .tp-rebrand-star .tp-rebrand-star__canvas{
     fill: #00B67A;
