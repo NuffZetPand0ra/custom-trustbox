@@ -36,6 +36,14 @@ h3 img{
     line-height:100%;
     font-size:1.4em;
 }
+#trust-stars #rebrand-stars{
+    width:150px;
+    position: relative;
+    top:2px;
+}
+.tp-rebrand-star .tp-rebrand-star__canvas{
+    fill: #00B67A;
+}
 #review-count{
     margin:0;
     font-size:0.8em;
