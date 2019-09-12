@@ -2,6 +2,10 @@
 
 namespace inkpro\trustpilot;
 use Carbon\Carbon;
+use League\Flysystem\Adapter\Local;
+use League\Flysystem\Filesystem;
+use Cache\Adapter\Filesystem\FilesystemCachePool;
+use Psr\Cache\CacheItemPoolInterface;
 
 class TrustpilotData{
 
@@ -16,23 +20,18 @@ class TrustpilotData{
     public $reviews;
 
 
-    private static $instance;
-    private static $cache_path = __DIR__."/../../cachedData.php";
-    private static $cache_ttl = 2;
+    private static $cache_pool;
 
 
     static function getData(){
         // $instance = self::loadLive();
         // $instance->saveToCache();
-        if($instance = self::loadCached()){
-            $cache_check = (new Carbon())->subMinutes(self::$cache_ttl);
-            if($instance->last_fetched < $cache_check){
-                $instance = self::loadLive();
-            }
-        }else{
-            $instance = self::loadLive();
+        $item = self::getCachePool()->getItem("trustpilot_reviews");
+        if(!$item->isHit()){
+            $item->set(self::loadLive());
+            $item->expiresAfter(300);
         }
-        return $instance;
+        return $item->get();
     }
     static function loadCached(){
         if(!file_exists(self::$cache_path)) return false;
@@ -46,9 +45,11 @@ class TrustpilotData{
             "businessUnitId"=>$businessUnitId,
             "includeReviews"=>"true",
             "reviewsPerPage"=>15,
-            "reviewStars"=>5
+            "reviewStars"=>5,
+            "locale"=>"DA-dk"
         ];
-        $url = "https://widget.trustpilot.com/base-data?".http_build_query($request_data);
+        // $url = "https://widget.trustpilot.com/base-data?".http_build_query($request_data);
+        $url = "https://widget.trustpilot.com/trustbox-data/53aa8912dec7e10d38f59f36?".http_build_query($request_data);
         $data = json_decode(file_get_contents($url));
         $instance = new TrustpilotData;
         $review_numbers = $data->businessUnit->numberOfReviews;
@@ -75,11 +76,21 @@ class TrustpilotData{
             $review->consumer_name = $this_review->consumer->displayName;
             $instance->reviews[] = $review;
         }
-        $instance->saveToCache();
-        return self::$instance = $instance;
+        // $instance->saveToCache();
+        return $instance;
     }
     public function saveToCache(){
         $serialized = serialize($this);
         file_put_contents(TrustpilotData::$cache_path, $serialized);
+    }
+    private static function getCachePool()
+    {
+        if(!self::$cache_pool){
+            $filesystemAdapter = new Local(__DIR__.'/../');
+            $filesystem = new Filesystem($filesystemAdapter);
+            self::$cache_pool = new FilesystemCachePool($filesystem);
+            self::$cache_pool->setFolder('cache');
+        }
+        return self::$cache_pool;
     }
 }

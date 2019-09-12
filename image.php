@@ -6,9 +6,7 @@ use \Gettext\GettextTranslator;
 
 $box = $_GET['box'];
 
-// $dotenv = new Dotenv(__DIR__);
-// $dotenv->load();
-$dotenv = Dotenv::create(__DIR__);
+$dotenv = new Dotenv(__DIR__);
 $dotenv->load();
 
 $locale = "da_DK";

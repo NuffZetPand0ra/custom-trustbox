@@ -1,2 +1,3 @@
 RewriteEngine On
 RewriteRule ^box/([A-Za-z]+)\/?$ box.php?box=$1 [QSA]
+RewriteRule ^image/([A-Za-z]+)\/?$ image.php?box=$1 [QSA]
