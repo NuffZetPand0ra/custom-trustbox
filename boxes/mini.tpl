@@ -3,6 +3,7 @@
     <head>
         <title>Trusbox for {$data->display_name}</title>
         <link href="{$base_path}/static/themes/{$theme}.css" rel="stylesheet">
+        <link href="<link href="https://fonts.googleapis.com/css?family=Lato:100,300&display=swap" rel="preload" as="style" onload="this.rel='stylesheet'">
         <meta charset="utf-8">
     </head>
     <body style="background-color:{$background_color};font-size:{$font_size}px">
